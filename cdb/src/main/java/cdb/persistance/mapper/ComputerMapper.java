@@ -1,10 +1,9 @@
 package cdb.persistance.mapper;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
+import cdb.model.Company;
 import cdb.model.Computer;
 
 public class ComputerMapper {
@@ -26,18 +25,23 @@ public class ComputerMapper {
 			// Le company
 			computer.setId(id);
 			computer.setName(name);
-			System.out.println(rs.getString("introduced") == null );
+			// computer.setCompany());
+			// System.out.println(rs.getString("introduced") == null );
 			if (rs.getString("introduced")!= null) {
 				computer.setIntroduced(rs.getDate("introduced").toLocalDate());
 			}
 			if (rs.getString("discontinued")!= null) {
 				computer.setDiscontinued(rs.getDate("discontinued").toLocalDate());
 			}
+
+			if (rs.getString("company_id") != null) {
+				computer.setCompany(new Company(Integer.parseInt(rs.getString("company_id")), rs.getString("company_name")));
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(computer);
+		//System.out.println(computer);
 		return computer;
 	}
 }

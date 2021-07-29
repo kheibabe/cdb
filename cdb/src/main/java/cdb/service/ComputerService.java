@@ -21,4 +21,8 @@ public class ComputerService {
 		// TODO Auto-generated method stub
 		return computerDAO.getAllComputer();
 	}
+	
+	public Computer getComputer(int id) {
+		return computerDAO.getComputerById(id);
+	}
 }

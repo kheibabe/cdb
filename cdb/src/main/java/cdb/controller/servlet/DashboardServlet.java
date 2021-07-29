@@ -18,4 +18,8 @@ public class DashboardServlet extends HttpServlet {
 		// request.setAttribute("heure", "jour");
 		this.getServletContext().getRequestDispatcher("/WEB-INF/dashboard.jsp").forward(request, response);
 	}
+	
+	
+	
+	
 }

@@ -10,8 +10,11 @@ public class Company {
 		this.name = name;
 }
 
+    public Company() {
+    	
+	}
 
-    public String getName() {
+	public String getName() {
 		return name;
     }
 

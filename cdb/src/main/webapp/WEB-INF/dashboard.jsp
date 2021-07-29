@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,9 +8,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
 <!-- Bootstrap -->
-<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="../css/font-awesome.css" rel="stylesheet" media="screen">
-<link href="../css/main.css" rel="stylesheet" media="screen">
+<style><%@include file="../../static/css/bootstrap.min.css"%></style>
+<style><%@include file="../../static/css/font-awesome.css"%></style>
+<style><%@include file="../../static/css/main.css"%></style>
+
+
 </head>
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
@@ -164,7 +169,7 @@
                             <input type="checkbox" name="cb" class="cb" value="0">
                         </td>
                         <td>
-                            <a href="editComputer.html" onclick="">NeXTcube</a>
+                            <a href="editComputer.html" onclick="">NeXTKheiracube</a>
                         </td>
                         <td>1988-01-01</td>
                         <td>1993-01-01</td>

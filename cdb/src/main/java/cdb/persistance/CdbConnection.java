@@ -25,7 +25,7 @@ public class CdbConnection {
 			// Etape 1 : Chargement du driver
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			// Etape 2 : récupération de la connexion
-			con = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+			con = DriverManager.getConnection(URL, LOGIN, PASSWORD); // On instancie un objet connection
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} catch (ClassNotFoundException e) {
