@@ -25,4 +25,9 @@ public class ComputerService {
 	public Computer getComputer(int id) {
 		return computerDAO.getComputerById(id);
 	}
+
+	public int countAllComputer() {
+		// TODO Auto-generated method stub
+		return computerDAO.countAllComputer();
+	}
 }

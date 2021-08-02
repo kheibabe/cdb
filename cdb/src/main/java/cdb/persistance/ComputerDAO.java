@@ -20,7 +20,8 @@ public class ComputerDAO {
 	private ComputerMapper computerMapper = ComputerMapper.getInstance();
 	private static final String REQ_GET_ALL_COMPUTER = "SELECT cpr.id, cpr.name, cpr.introduced, cpr.discontinued, cpr.company_id, cny.name as company_name from computer as cpr left join company as cny ON cpr.company_id = cny.id";
 	private static final String REQ_GET_CPR_BY_ID = "SELECT cpr.id, cpr.name, cpr.introduced, cpr.discontinued, cpr.company_id, cny.name as company_name from computer as cpr left join company as cny ON cpr.company_id = cny.id WHERE cpr.id = ?";
-	// private static final String REQ_ADD_CPR = "INSERT INTO computer(name, introduced, discontinued, company_id) VALUES (?, ?, ?, ?);";
+	private static final String REQ_ADD_CPR = "INSERT INTO computer(name, introduced, discontinued, company_id) VALUES (?, ?, ?, ?);";
+	private static final String REQ_COUNT_ALL_CPR = "SELECT COUNT(*) FROM computer;";
 	
 	public static ComputerDAO getInstance() {
 		if(instance == null) {
@@ -48,11 +49,7 @@ public class ComputerDAO {
 
 		return listComputer;
 	}
-	/*
-	 private Computer createComputer(ResultSet resultSet, Computer computer) throws SQLException {
-	        return new Computer(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getDate(Date.valueOf(computer.getIntroduced())), null, null
-	    }
-	*/
+	
 	public Computer getComputerById(int id) { // Optional ?
 		
 		Computer computer = new Computer();
@@ -73,12 +70,11 @@ public class ComputerDAO {
 		
 		
 	}
-	/*
-	public boolean add(Computer computer) throws Exception {
-        if (getComputerById(computer.getId()).isPresent()) {
-            return false;
-        }
+	
 
+	
+	public void add(Computer computer) {
+      
         try (Connection con = cdbcn.getConnection(); PreparedStatement stmt =
             con.prepareStatement(REQ_ADD_CPR)) {
             stmt.setInt(1, computer.getId());
@@ -86,12 +82,30 @@ public class ComputerDAO {
             stmt.setDate(3, Date.valueOf(computer.getIntroduced()));
             stmt.setDate(4, Date.valueOf(computer.getDiscontinued()));
             stmt.execute();
-            return true;
-        } catch (SQLException ex) {
-            throw new CustomException(ex.getMessage(), ex);
+         
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
-*/
+
+
+	public int countAllComputer() {
+		int countAllComputer = 0;
+		//trywithresources
+		try (Connection con = cdbcn.getConnection(); 
+				PreparedStatement stmt =
+			            con.prepareStatement(REQ_COUNT_ALL_CPR)) {
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			countAllComputer = rs.getInt(1);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return countAllComputer;
+	}
 	
 	
 	
