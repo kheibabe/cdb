@@ -36,7 +36,7 @@
                     </form>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-success" id="addComputer" href="addComputer.html">Add Computer</a> 
+                    <a class="btn btn-success" id="addComputer" href="addComputer">Add Computer</a> 
                     <a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();">Edit</a>
                 </div>
             </div>
@@ -105,7 +105,7 @@
         <div class="container text-center">
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Previous">
+                    <a href="?page=1" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                   </a>
               </li>
@@ -115,7 +115,7 @@
               <li><a href="#">4</a></li>
               <li><a href="#">5</a></li>
               <li>
-                <a href="#" aria-label="Next">
+                <a href="?page=${ page.nbrePageMax }" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

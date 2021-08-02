@@ -17,6 +17,7 @@ import cdb.service.ComputerService;
 public class DashboardServlet extends HttpServlet {
 
 	private ComputerService computerService; 
+	private Page page = new Page();
 			
 	public DashboardServlet() {
 		this.computerService = ComputerService.getInstance();
@@ -28,11 +29,15 @@ public class DashboardServlet extends HttpServlet {
 		// request.setAttribute("heure", "jour");
 		
 		List<Computer> listComputer = computerService.getAllComputer();
+		request.setAttribute("listComputer", listComputer);
 		
 		int nbComputer = computerService.countAllComputer();
-		
 		request.setAttribute("nbComputer", nbComputer);
-		request.setAttribute("listComputer", listComputer);
+		
+		
+		request.setAttribute("page", page);
+		
+		
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/dashboard.jsp").forward(request, response);
 	}

@@ -43,7 +43,7 @@ public class ComputerDAO {
 				listComputer.add(computer);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -62,7 +62,7 @@ public class ComputerDAO {
 			rs.next();
 			computer = computerMapper.mapToComputer(rs);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -73,14 +73,14 @@ public class ComputerDAO {
 	
 
 	
-	public void add(Computer computer) {
+	public void addComputer(Computer computer) {
       
         try (Connection con = cdbcn.getConnection(); PreparedStatement stmt =
             con.prepareStatement(REQ_ADD_CPR)) {
-            stmt.setInt(1, computer.getId());
-            stmt.setString(2, computer.getName());
-            stmt.setDate(3, Date.valueOf(computer.getIntroduced()));
-            stmt.setDate(4, Date.valueOf(computer.getDiscontinued()));
+            stmt.setString(1, computer.getName());
+            stmt.setDate(2, Date.valueOf(computer.getIntroduced()));
+            stmt.setDate(3, Date.valueOf(computer.getDiscontinued()));
+            stmt.setInt(4, computer.getCompany().getId());
             stmt.execute();
          
         } catch (SQLException e) {
@@ -91,7 +91,7 @@ public class ComputerDAO {
 
 	public int countAllComputer() {
 		int countAllComputer = 0;
-		//trywithresources
+		
 		try (Connection con = cdbcn.getConnection(); 
 				PreparedStatement stmt =
 			            con.prepareStatement(REQ_COUNT_ALL_CPR)) {

@@ -2,9 +2,13 @@ package cdb.controller.servlet;
 
 public class Page {
 
-	private int nbrElemPage;
-	private int numPage;
+	private int nbrElemPage = 10;
+	private int numPage = 1;
 	private int nbrElemDb;
+	
+	public Page() {
+	}
+	
 	
 	public Page(int nbrElemPage, int numPage, int nbrElemDb) {
 		this.nbrElemPage = nbrElemPage;

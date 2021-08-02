@@ -18,7 +18,6 @@ public class ComputerService {
 	}
 	
 	public List<Computer> getAllComputer() {
-		// TODO Auto-generated method stub
 		return computerDAO.getAllComputer();
 	}
 	
@@ -27,7 +26,10 @@ public class ComputerService {
 	}
 
 	public int countAllComputer() {
-		// TODO Auto-generated method stub
 		return computerDAO.countAllComputer();
+	}
+	
+	public void addComputer(Computer computer) {
+		computerDAO.addComputer(computer);
 	}
 }
