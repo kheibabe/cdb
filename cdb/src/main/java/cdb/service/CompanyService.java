@@ -2,15 +2,18 @@ package cdb.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import cdb.model.Company;
 import cdb.model.Computer;
 import cdb.persistance.CdbConnection;
 import cdb.persistance.CompanyDAO;
 
+@Service
 public class CompanyService {
 	
-	private CompanyDAO companyDAO = new CompanyDAO();
-	private static CompanyService instance;
+	private CompanyDAO companyDAO; // = new CompanyDAO();
+	/* private static CompanyService instance;
 
 	public static CompanyService getInstance() {
 		if(instance == null) {
@@ -18,9 +21,13 @@ public class CompanyService {
 		}
 		return instance;
 	}
+	*/
+	
+	public CompanyService(CompanyDAO companyDAO) {
+		this.companyDAO = companyDAO;
+	}
 	
 	public List<Company> getAllCompany() {
-		// TODO Auto-generated method stub
 		return companyDAO.getAllCompany();
 	}
 	

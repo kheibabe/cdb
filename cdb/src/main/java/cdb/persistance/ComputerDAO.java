@@ -8,28 +8,42 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import java.sql.Date;
 
 import cdb.model.Company;
 import cdb.model.Computer;
 import cdb.persistance.mapper.ComputerMapper;
 
+@Repository 
+
 public class ComputerDAO {
-	private static ComputerDAO instance;
-	private CdbConnection cdbcn = CdbConnection.getInstance();
-	private ComputerMapper computerMapper = ComputerMapper.getInstance();
+	// private static ComputerDAO instance;
+	private CdbConnection cdbcn; // = CdbConnection.getInstance();
+	private ComputerMapper computerMapper; // = ComputerMapper.getInstance();
 	private static final String REQ_GET_ALL_COMPUTER = "SELECT cpr.id, cpr.name, cpr.introduced, cpr.discontinued, cpr.company_id, cny.name as company_name from computer as cpr left join company as cny ON cpr.company_id = cny.id";
 	private static final String REQ_GET_CPR_BY_ID = "SELECT cpr.id, cpr.name, cpr.introduced, cpr.discontinued, cpr.company_id, cny.name as company_name from computer as cpr left join company as cny ON cpr.company_id = cny.id WHERE cpr.id = ?";
 	private static final String REQ_ADD_CPR = "INSERT INTO computer(name, introduced, discontinued, company_id) VALUES (?, ?, ?, ?);";
 	private static final String REQ_COUNT_ALL_CPR = "SELECT COUNT(*) FROM computer;";
 	
+	
+	/*
 	public static ComputerDAO getInstance() {
 		if(instance == null) {
 			instance = new ComputerDAO();
 		}
 		return instance;
 	}
-
+	*/
+	@Autowired
+	public ComputerDAO(ComputerMapper computerMapper, CdbConnection cdbcn ) {
+		this.cdbcn = cdbcn;
+		this.computerMapper = computerMapper;
+	}
+	
 	public List<Computer> getAllComputer() {
 		List<Computer> listComputer = new ArrayList<>();
 

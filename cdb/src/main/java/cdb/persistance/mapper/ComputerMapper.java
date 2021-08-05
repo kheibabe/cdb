@@ -3,11 +3,15 @@ package cdb.persistance.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Component;
+
 import cdb.model.Company;
 import cdb.model.Computer;
 
+@Component("computerMapper")
 public class ComputerMapper {
 	
+	/*
 	private static ComputerMapper instance;
 
 	public static ComputerMapper getInstance() {
@@ -15,6 +19,10 @@ public class ComputerMapper {
 			instance = new ComputerMapper();
 		}
 		return instance;
+	}*/
+	
+	public ComputerMapper () {
+		
 	}
 
 	public Computer mapToComputer(ResultSet rs) {
@@ -38,7 +46,6 @@ public class ComputerMapper {
 				computer.setCompany(new Company(Integer.parseInt(rs.getString("company_id")), rs.getString("company_name")));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//System.out.println(computer);

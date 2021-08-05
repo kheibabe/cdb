@@ -8,25 +8,36 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import cdb.model.Company;
 import cdb.model.Computer;
 import cdb.persistance.mapper.CompanyMapper;
 import cdb.persistance.mapper.ComputerMapper;
 
+
+@Repository
 public class CompanyDAO {
 
-	private static CompanyDAO instance;
-	private CompanyMapper companyMapper = CompanyMapper.getInstance();
+	// private static CompanyDAO instance;
+	private CompanyMapper companyMapper; // = CompanyMapper.getInstance();
 	private static final String REQ_GET_ALL_COMPANY = "SELECT id, name FROM company;"; // On précise les champs pour
 																						// sécuriser
 	private final String REQ_GET_COMPANY_BY_ID = "SELECT id, name FROM company WHERE id = ? ;";
-	private CdbConnection cdbcn = CdbConnection.getInstance();
+	private CdbConnection cdbcn; // = CdbConnection.getInstance();
 
-	public static CompanyDAO getInstance() {
+	/* public static CompanyDAO getInstance() {
 		if (instance == null) {
 			instance = new CompanyDAO();
 		}
 		return instance;
+	}*/
+	
+	@Autowired
+	public CompanyDAO(CompanyMapper companyMapper, CdbConnection cbdcn) {
+		this.companyMapper = companyMapper;
+		this.cdbcn = cbdcn;
 	}
 
 	public List<Company> getAllCompany() {
@@ -64,7 +75,6 @@ public class CompanyDAO {
 			rs.next();
 			company = companyMapper.mapToCompany(rs);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

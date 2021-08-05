@@ -3,30 +3,67 @@ package cdb.controller.servlet;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import cdb.config.ConfigWeb;
 import cdb.model.Computer;
 import cdb.service.ComputerService;
 
-@WebServlet("/dashboard")
+// @WebServlet("/dashboard")
+@WebServlet(name = "Dashboard", urlPatterns = { "/dashboard" })
 
 public class DashboardServlet extends HttpServlet {
 
 	private ComputerService computerService; 
 	private Page page = new Page();
+	// private WebApplicationContext springContext;
 			
+	
+	/*
 	public DashboardServlet() {
 		this.computerService = ComputerService.getInstance();
 		
 	}
 	
+	@Autowired
+	public DashboardServlet(ComputerService computerService) {
+		this.computerService = computerService;
+	}
+	*/
+	
+	
+	
+	
+	/* 
+	 * ApplicationContext context = new AnnotationConfigApplicationContext(AccountConfig.class);
+AccountService accountService = context.getBean(AccountService.class);
+	 * 
+	 */
+	public void init() {
+		try {
+			super.init();
+			ApplicationContext context = new AnnotationConfigApplicationContext(ConfigWeb.class);
+			computerService = context.getBean(ComputerService.class);
+			
+		} catch(ServletException e) {
+			e.printStackTrace();
+		}
+	}
+	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//afficher la jsp depuis sont path
-		// request.setAttribute("heure", "jour");
 		
 		List<Computer> listComputer = computerService.getAllComputer();
 		request.setAttribute("listComputer", listComputer);
@@ -40,6 +77,7 @@ public class DashboardServlet extends HttpServlet {
 		
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/dashboard.jsp").forward(request, response);
+		
 	}
 
 	

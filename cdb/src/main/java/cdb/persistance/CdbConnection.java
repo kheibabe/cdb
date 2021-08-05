@@ -4,23 +4,28 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class CdbConnection {
 	
 	private final static String URL = "jdbc:mysql://localhost:3306/computer-database-db?zeroDateTimeBehavior=convertToNull";
 	private final static String LOGIN= "admincdb";
 	private final static String PASSWORD = "qwerty1234";
 	private static  Connection con = null;
-	private static CdbConnection instance;
+	// private static CdbConnection instance;
 	
-	
+	/*
 	public static CdbConnection getInstance() {
 		if(instance == null) {
 			instance = new CdbConnection();
 		}
 		return instance;
 	}
-	
-	private CdbConnection() {
+	*/
+	@Autowired
+	public CdbConnection() {
 		try {
 			// Etape 1 : Chargement du driver
 			Class.forName("com.mysql.cj.jdbc.Driver");

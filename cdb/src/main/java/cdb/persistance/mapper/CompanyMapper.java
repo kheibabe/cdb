@@ -3,17 +3,26 @@ package cdb.persistance.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Component;
+
 import cdb.model.Company;
 
+@Component("companyMapper")
 public class CompanyMapper {
 
-	private static CompanyMapper instance;
-	public static CompanyMapper getInstance() {
+	// private static CompanyMapper instance;
+	
+	/* public static CompanyMapper getInstance() {
 		
 		if(instance == null) {
 			instance = new CompanyMapper();
 		}
 		return null;
+	}
+	*/
+	
+	public CompanyMapper() {
+		
 	}
 
 	public Company mapToCompany(ResultSet rs) {
