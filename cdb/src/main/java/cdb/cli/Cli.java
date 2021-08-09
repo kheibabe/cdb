@@ -19,6 +19,7 @@ public class Cli {
 
 		context = new AnnotationConfigApplicationContext(ConfigWeb.class);
 
+		
 		List<Computer> listcomputer = context.getBean(ComputerService.class).getAllComputer();
 		for (Computer computer : listcomputer) {
 			System.out.println(computer);

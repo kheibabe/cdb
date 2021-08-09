@@ -81,7 +81,22 @@ public class Computer {
 				+ ", company=" + company + "]";
 	}
 
+	/*
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return price == car.price &&
+                Objects.equals(id, car.id) &&
+                Objects.equals(name, car.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, price);
+    }
 	
-	
-	
+	*/
 }
