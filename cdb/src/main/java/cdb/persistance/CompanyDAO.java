@@ -10,6 +10,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import cdb.model.Company;
@@ -26,8 +29,9 @@ public class CompanyDAO {
 	private CompanyMapper companyMapper; // = CompanyMapper.getInstance();
 	private static final String REQ_GET_ALL_COMPANY = "SELECT id, name FROM company;"; // On précise les champs pour
 																						// sécuriser
-	private final String REQ_GET_COMPANY_BY_ID = "SELECT id, name FROM company WHERE id = ? ;";
+	private final String REQ_GET_COMPANY_BY_ID = "SELECT id, name FROM company WHERE id = :id ;";
 	private CdbConnection cdbcn; // = CdbConnection.getInstance();
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	/* public static CompanyDAO getInstance() {
 		if (instance == null) {
@@ -37,9 +41,10 @@ public class CompanyDAO {
 	}*/
 	
 	@Autowired
-	public CompanyDAO(CompanyMapper companyMapper, JdbcTemplate jdbcTemplate) {
+	public CompanyDAO(CompanyMapper companyMapper, JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.companyMapper = companyMapper;
 		this.jdbcTemplate = jdbcTemplate;
+		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 		// this.cdbcn = cbdcn;
 	}
 
@@ -69,7 +74,7 @@ public class CompanyDAO {
 
 	public Company getCompanyById(int id) { // Optional ?
 
-		Company company = new Company();
+		/* Company company = new Company();
 		ResultSet rs = null;
 
 		try (Connection con = cdbcn.getConnection();
@@ -83,7 +88,11 @@ public class CompanyDAO {
 			e.printStackTrace();
 		}
 
-		return company;
+		return company; */
+		
+		SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", id);
+		return namedParameterJdbcTemplate.queryForObject(
+				REQ_GET_COMPANY_BY_ID, namedParameters, companyMapper);
 
 	}
 

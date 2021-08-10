@@ -28,6 +28,10 @@ public class ComputerController {
 	public Computer getComputerById(int id) {
 		return computerService.getComputer(id);
 	}
+	
+	public void deleteComputer(int id) {
+		computerService.deleteComputer(id);
+	}
 
 
 }

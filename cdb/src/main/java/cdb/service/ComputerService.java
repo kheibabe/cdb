@@ -47,4 +47,8 @@ public class ComputerService {
 	public void addComputer(Computer computer) {
 		computerDAO.addComputer(computer);
 	}
+	
+	public void deleteComputer(int id) {
+		computerDAO.deleteComputer(id);
+	}
 }
