@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Date;
 
@@ -22,6 +23,7 @@ import cdb.persistance.mapper.ComputerMapper;
 
 public class ComputerDAO {
 	// private static ComputerDAO instance;
+	private JdbcTemplate jdbcTemplate;
 	private CdbConnection cdbcn; // = CdbConnection.getInstance();
 	private ComputerMapper computerMapper; // = ComputerMapper.getInstance();
 	private static final String REQ_GET_ALL_COMPUTER = "SELECT cpr.id, cpr.name, cpr.introduced, cpr.discontinued, cpr.company_id, cny.name as company_name from computer as cpr left join company as cny ON cpr.company_id = cny.id";
@@ -39,13 +41,15 @@ public class ComputerDAO {
 	}
 	*/
 	@Autowired
-	public ComputerDAO(ComputerMapper computerMapper, CdbConnection cdbcn ) {
-		this.cdbcn = cdbcn;
+	public ComputerDAO(ComputerMapper computerMapper, JdbcTemplate jdbcTemplate) {
+		
 		this.computerMapper = computerMapper;
+		this.jdbcTemplate = jdbcTemplate;
 	}
 	
 	public List<Computer> getAllComputer() {
-		List<Computer> listComputer = new ArrayList<>();
+		
+		/*List<Computer> listComputer = new ArrayList<>();
 
 		try (Connection con = cdbcn.getConnection()) {
 			Statement stmt = con.createStatement(); // Objet créé à partir de l'objet connection qui permet d'envoyer requêtes SQL à la DB
@@ -60,9 +64,12 @@ public class ComputerDAO {
 			
 			e.printStackTrace();
 		}
-
 		return listComputer;
+*/
+		return jdbcTemplate.query(REQ_GET_ALL_COMPUTER, computerMapper);
+		
 	}
+	
 	
 	public Computer getComputerById(int id) { // Optional ?
 		

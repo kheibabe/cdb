@@ -35,6 +35,7 @@ public class ComputerService {
 		return computerDAO.getAllComputer();
 	}
 	
+	
 	public Computer getComputer(int id) {
 		return computerDAO.getComputerById(id);
 	}

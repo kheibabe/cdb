@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -39,6 +40,11 @@ public class ConfigWeb {
 	@Bean
 	public NamedParameterJdbcTemplate getNamedParameterJdbcTemplate() {
 		return new NamedParameterJdbcTemplate(mysqlDataSource());
+	}
+	
+	@Bean
+	public JdbcTemplate JdbcTemplate() {
+		return new JdbcTemplate(mysqlDataSource());
 	}
 	
 	
