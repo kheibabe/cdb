@@ -6,7 +6,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import cdb.config.ConfigWeb;
+import cdb.model.Company;
 import cdb.model.Computer;
+import cdb.service.CompanyService;
 import cdb.service.ComputerService;
 
 
@@ -19,11 +21,16 @@ public class Cli {
 
 		context = new AnnotationConfigApplicationContext(ConfigWeb.class);
 
+		List<Company> listcompany = context.getBean(CompanyService.class).getAllCompany();
+		for (Company company : listcompany) {
+			System.out.println(company);
+		}
 		
-		List<Computer> listcomputer = context.getBean(ComputerService.class).getAllComputer();
+		
+		/* List<Computer> listcomputer = context.getBean(ComputerService.class).getAllComputer();
 		for (Computer computer : listcomputer) {
 			System.out.println(computer);
-		}
+		} */
 
 	}
 }

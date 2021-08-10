@@ -3,12 +3,14 @@ package cdb.persistance.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import cdb.model.Company;
+import cdb.model.Computer;
 
 @Component("companyMapper")
-public class CompanyMapper {
+public class CompanyMapper implements RowMapper<Company> {
 
 	// private static CompanyMapper instance;
 	
@@ -24,6 +26,20 @@ public class CompanyMapper {
 	public CompanyMapper() {
 		
 	}
+	
+	@Override
+	public Company mapRow(ResultSet rs, int rowNum) throws SQLException {
+		Company company = new Company();
+		company.setId(rs.getInt("id"));
+		company.setName(rs.getString("name"));
+		/*
+		 * computer.setIntroduced(rs.getDate("introduced"));
+		 * computer.setDiscontinued(rs.getDate("discontinued"));
+		 * user.setUpdatedTime(rs.getDate("UPDATEDTIME"));
+		*/
+
+		return company;
+	} 
 
 	public Company mapToCompany(ResultSet rs) {
 		Company company = new Company();

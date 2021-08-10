@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import cdb.model.Company;
@@ -21,6 +22,7 @@ import cdb.persistance.mapper.ComputerMapper;
 public class CompanyDAO {
 
 	// private static CompanyDAO instance;
+	private JdbcTemplate jdbcTemplate;
 	private CompanyMapper companyMapper; // = CompanyMapper.getInstance();
 	private static final String REQ_GET_ALL_COMPANY = "SELECT id, name FROM company;"; // On précise les champs pour
 																						// sécuriser
@@ -35,14 +37,15 @@ public class CompanyDAO {
 	}*/
 	
 	@Autowired
-	public CompanyDAO(CompanyMapper companyMapper, CdbConnection cbdcn) {
+	public CompanyDAO(CompanyMapper companyMapper, JdbcTemplate jdbcTemplate) {
 		this.companyMapper = companyMapper;
-		this.cdbcn = cbdcn;
+		this.jdbcTemplate = jdbcTemplate;
+		// this.cdbcn = cbdcn;
 	}
 
 	public List<Company> getAllCompany() {
 
-		List<Company> listCompany = new ArrayList<>();
+		/* List<Company> listCompany = new ArrayList<>();
 
 		try (Connection con = cdbcn.getConnection()) {
 			Statement stmt = con.createStatement();
@@ -59,7 +62,9 @@ public class CompanyDAO {
 			e.printStackTrace();
 		}
 
-		return listCompany;
+		return listCompany;*/
+		
+		return jdbcTemplate.query(REQ_GET_ALL_COMPANY, companyMapper);
 	}
 
 	public Company getCompanyById(int id) { // Optional ?
