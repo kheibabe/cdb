@@ -23,8 +23,8 @@ public class Cli {
 	public static void main(final String[] args) {
 		
 		context = new AnnotationConfigApplicationContext(ConfigWeb.class);
-		int id = 5;
-		context.getBean(ComputerService.class).deleteComputer(id);
+		int id = 42;
+		context.getBean(ComputerService.class).deleteComputerWithCnyId(id);
 		List<Computer> listcomputer = context.getBean(ComputerService.class).getAllComputer();
 		for (Computer computer : listcomputer) {
 			System.out.println(computer);

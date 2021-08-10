@@ -34,6 +34,11 @@ public class CompanyService {
 	public Company getCompany(int id) {
 		return companyDAO.getCompanyById(id);
 	}
+
+	public void deleteCompany(int id) {
+		// TODO Auto-generated method stub
+		companyDAO.deleteCompany(id);
+	}
 	
 }
 

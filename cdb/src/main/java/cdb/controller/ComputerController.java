@@ -33,5 +33,8 @@ public class ComputerController {
 		computerService.deleteComputer(id);
 	}
 
+	public void deleteComputerWithCnyId(int id) {
+		computerService.deleteComputerWithCnyId(id);
+	}
 
 }

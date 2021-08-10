@@ -22,7 +22,7 @@ import cdb.model.Company;
 import cdb.model.Computer;
 import cdb.persistance.mapper.ComputerMapper;
 
-@Repository 
+@Repository
 
 public class ComputerDAO {
 	// private static ComputerDAO instance;
@@ -35,137 +35,117 @@ public class ComputerDAO {
 	private static final String REQ_ADD_CPR = "INSERT INTO computer(name, introduced, discontinued, company_id) VALUES (?, ?, ?, ?);";
 	private static final String REQ_COUNT_ALL_CPR = "SELECT COUNT(*) FROM computer;";
 	private static final String REQ_DELETE_CPR = "DELETE FROM computer WHERE id = :id ;";
-	
-	
+	private static final String REQ_DELETE_CPR_CNYID = "DELETE FROM computer WHERE company_id = :id ;";
+
 	/*
-	public static ComputerDAO getInstance() {
-		if(instance == null) {
-			instance = new ComputerDAO();
-		}
-		return instance;
-	}
-	*/
+	 * public static ComputerDAO getInstance() { if(instance == null) { instance =
+	 * new ComputerDAO(); } return instance; }
+	 */
 	@Autowired
-	public ComputerDAO(ComputerMapper computerMapper, JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-		
+	public ComputerDAO(ComputerMapper computerMapper, JdbcTemplate jdbcTemplate,
+			NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+
 		this.computerMapper = computerMapper;
 		this.jdbcTemplate = jdbcTemplate;
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
-	
+
 	public List<Computer> getAllComputer() {
-		
-		/*List<Computer> listComputer = new ArrayList<>();
 
-		try (Connection con = cdbcn.getConnection()) {
-			Statement stmt = con.createStatement(); // Objet créé à partir de l'objet connection qui permet d'envoyer requêtes SQL à la DB
-			ResultSet rs = stmt.executeQuery(REQ_GET_ALL_COMPUTER);
-			while (rs.next()) {
-				
-				Computer computer = computerMapper.mapToComputer(rs);
-				
-				listComputer.add(computer);
-			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		return listComputer;
-*/
-		return jdbcTemplate.query(REQ_GET_ALL_COMPUTER, computerMapper);
-		
-	}
-	
-	
-	public Computer getComputerById(int id) { // Optional ?
-		
-		 /* int id = 1;
-		return namedParameterJdbcTemplate.queryForObject(
-				REQ_GET_CPR_BY_ID, new Object[] { id }, computerMapper); */
-		
-		
-		SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", id);
-		return namedParameterJdbcTemplate.queryForObject(
-				REQ_GET_CPR_BY_ID, namedParameters, computerMapper);
-		
 		/*
-		Computer computer = new Computer();
-		ResultSet rs = null;
-		
-		try (Connection con = cdbcn.getConnection(); PreparedStatement stmt = con.prepareStatement(REQ_GET_CPR_BY_ID)) {
-			
-			stmt.setInt(1, id);
-			rs = stmt.executeQuery();
-			rs.next();
-			computer = computerMapper.mapToComputer(rs);
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
+		 * List<Computer> listComputer = new ArrayList<>();
+		 * 
+		 * try (Connection con = cdbcn.getConnection()) { Statement stmt =
+		 * con.createStatement(); // Objet créé à partir de l'objet connection qui
+		 * permet d'envoyer requêtes SQL à la DB ResultSet rs =
+		 * stmt.executeQuery(REQ_GET_ALL_COMPUTER); while (rs.next()) {
+		 * 
+		 * Computer computer = computerMapper.mapToComputer(rs);
+		 * 
+		 * listComputer.add(computer); } } catch (SQLException e) {
+		 * 
+		 * e.printStackTrace(); } return listComputer;
+		 */
+		return jdbcTemplate.query(REQ_GET_ALL_COMPUTER, computerMapper);
 
-		return computer;*/
-		
-		
 	}
-	
 
-	
+	public Computer getComputerById(int id) { // Optional ?
+
+		/*
+		 * int id = 1; return namedParameterJdbcTemplate.queryForObject(
+		 * REQ_GET_CPR_BY_ID, new Object[] { id }, computerMapper);
+		 */
+
+		SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", id);
+		return namedParameterJdbcTemplate.queryForObject(REQ_GET_CPR_BY_ID, namedParameters, computerMapper);
+
+		/*
+		 * Computer computer = new Computer(); ResultSet rs = null;
+		 * 
+		 * try (Connection con = cdbcn.getConnection(); PreparedStatement stmt =
+		 * con.prepareStatement(REQ_GET_CPR_BY_ID)) {
+		 * 
+		 * stmt.setInt(1, id); rs = stmt.executeQuery(); rs.next(); computer =
+		 * computerMapper.mapToComputer(rs); } catch (SQLException e) {
+		 * 
+		 * e.printStackTrace(); }
+		 * 
+		 * return computer;
+		 */
+
+	}
+
 	public void addComputer(Computer computer) {
-      
-        /* try (Connection con = cdbcn.getConnection(); PreparedStatement stmt =
-            con.prepareStatement(REQ_ADD_CPR)) {
-            stmt.setString(1, computer.getName());
-            stmt.setDate(2, Date.valueOf(computer.getIntroduced()));
-            stmt.setDate(3, Date.valueOf(computer.getDiscontinued()));
-            stmt.setInt(4, computer.getCompany().getId());
-            stmt.execute();
-         
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
-        
-        jdbcTemplate.update(REQ_ADD_CPR, computer.getName(), computer.getIntroduced(), computer.getDiscontinued(),
-				computer.getCompany().getId());
-	
-    }
 
+		/*
+		 * try (Connection con = cdbcn.getConnection(); PreparedStatement stmt =
+		 * con.prepareStatement(REQ_ADD_CPR)) { stmt.setString(1, computer.getName());
+		 * stmt.setDate(2, Date.valueOf(computer.getIntroduced())); stmt.setDate(3,
+		 * Date.valueOf(computer.getDiscontinued())); stmt.setInt(4,
+		 * computer.getCompany().getId()); stmt.execute();
+		 * 
+		 * } catch (SQLException e) { e.printStackTrace(); }
+		 */
+
+		jdbcTemplate.update(REQ_ADD_CPR, computer.getName(), computer.getIntroduced(), computer.getDiscontinued(),
+				computer.getCompany().getId());
+
+	}
 
 	public int countAllComputer() {
-		
-		
+
 		/*
-		int countAllComputer = 0;
-		
-		try (Connection con = cdbcn.getConnection(); 
-				PreparedStatement stmt =
-			            con.prepareStatement(REQ_COUNT_ALL_CPR)) {
-			ResultSet rs = stmt.executeQuery();
-			rs.next();
-			countAllComputer = rs.getInt(1);
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		return countAllComputer;
-		
-		*/
+		 * int countAllComputer = 0;
+		 * 
+		 * try (Connection con = cdbcn.getConnection(); PreparedStatement stmt =
+		 * con.prepareStatement(REQ_COUNT_ALL_CPR)) { ResultSet rs =
+		 * stmt.executeQuery(); rs.next(); countAllComputer = rs.getInt(1);
+		 * 
+		 * } catch (SQLException e) {
+		 * 
+		 * e.printStackTrace(); }
+		 * 
+		 * return countAllComputer;
+		 * 
+		 */
 		SqlParameterSource namedParameters = new MapSqlParameterSource();
-		return namedParameterJdbcTemplate.queryForObject(
-				REQ_COUNT_ALL_CPR, namedParameters, Integer.class);
-		
+		return namedParameterJdbcTemplate.queryForObject(REQ_COUNT_ALL_CPR, namedParameters, Integer.class);
+
 	}
-	
-	
-	
+
 	public void deleteComputer(int id) {
-		
+
 		SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", id);
-		namedParameterJdbcTemplate.update(
-				REQ_DELETE_CPR, namedParameters);
-		
+		namedParameterJdbcTemplate.update(REQ_DELETE_CPR, namedParameters);
+
 	}
-	
-	
+
+	public void deleteComputerWithCnyId(int id) {
+
+		SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", id);
+		namedParameterJdbcTemplate.update(REQ_DELETE_CPR_CNYID, namedParameters);
+
+	}
+
 }

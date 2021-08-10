@@ -26,4 +26,8 @@ public class CompanyController {
 	public Company getCompanyById(int id) {
 		return companyService.getCompany(id);
 	}
+	
+	public void deleteComputer(int id) {
+		companyService.deleteCompany(id);
+	}
 }
