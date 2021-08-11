@@ -12,6 +12,8 @@ import cdb.model.Computer.ComputerBuilder;
 
 @Component("computerMapper")
 public class ComputerMapper implements RowMapper<Computer> {
+	
+	// objet RowMapper permettant de mapper chaque enregistrement récupéré sur l'objet 
 
 	/*
 	 * private static ComputerMapper instance;
@@ -45,8 +47,9 @@ public class ComputerMapper implements RowMapper<Computer> {
 		}
 
 		if (rs.getString("company_id") != null) {
+			
 			computer.setCompany(
-					new Company(Integer.parseInt(rs.getString("company_id")), rs.getString("company_name")));
+					new Company(rs.getInt("company_id"), rs.getString("company_name")));
 		}
 
 		return computer;

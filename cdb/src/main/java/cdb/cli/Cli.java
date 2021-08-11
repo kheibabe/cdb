@@ -22,9 +22,15 @@ public class Cli {
 
 	public static void main(final String[] args) {
 		
+		String name = "javalesaaaang";
+		LocalDate introduced = LocalDate.parse("1993-02-23");
+		LocalDate discontinued = LocalDate.parse("2000-10-08");
+		int company = 3;
+		
+		Computer computertest = new ComputerBuilder().setName(name).setIntroduced(introduced).setDiscontinued(discontinued).setCompany(new Company(company, "newcompany")).build();
+		
 		context = new AnnotationConfigApplicationContext(ConfigWeb.class);
-		int id = 42;
-		context.getBean(ComputerService.class).deleteComputerWithCnyId(id);
+		context.getBean(ComputerService.class).addComputer(computertest);
 		List<Computer> listcomputer = context.getBean(ComputerService.class).getAllComputer();
 		for (Computer computer : listcomputer) {
 			System.out.println(computer);
@@ -35,7 +41,17 @@ public class Cli {
 
 		/*
 		 * 
+		 * computer.getCompany().getId());
+		 * TEST DELETE COMPUTER WITH COMPANY ID
+		 * context = new AnnotationConfigApplicationContext(ConfigWeb.class);
+		int id = 42;
+		context.getBean(ComputerService.class).deleteComputerWithCnyId(id);
+		List<Computer> listcomputer = context.getBean(ComputerService.class).getAllComputer();
+		for (Computer computer : listcomputer) {
+			System.out.println(computer);
 		 * 
+		 * 
+		 * TEST DELETE COMPUTER
 		 * 	context = new AnnotationConfigApplicationContext(ConfigWeb.class);
 		int id = 5;
 		context.getBean(ComputerService.class).deleteComputer(id);

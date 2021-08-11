@@ -1,4 +1,4 @@
-package cdb.controller.servlet;
+package cdb.model;
 
 public class Page {
 

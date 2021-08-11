@@ -6,6 +6,11 @@
     <servlet-class>cdb.controller.servlet.DashboardServlet</servlet-class>
   </servlet>
  
+ <servlet>
+    <servlet-name>AddComputerServlet</servlet-name>
+    <servlet-class>cdb.controller.servlet.AddComputerServlet</servlet-class>
+  </servlet>
+  
 </web-app>
 
 

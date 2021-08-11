@@ -17,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import cdb.config.ConfigWeb;
 import cdb.model.Computer;
+import cdb.model.Page;
 import cdb.service.ComputerService;
 
 // @WebServlet("/dashboard")
