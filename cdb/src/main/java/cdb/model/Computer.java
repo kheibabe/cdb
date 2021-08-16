@@ -10,15 +10,6 @@ public class Computer {
 	private LocalDate discontinued;
 	private Company company;
 
-	/* public Computer(int id, String name, LocalDate introduced, LocalDate discontinued, Company company) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.introduced = introduced;
-		this.discontinued = discontinued;
-		this.company = company;
-	} */
-
 	public Computer(ComputerBuilder computerBuilder) {
 		super();
 		this.id = computerBuilder.id;

@@ -22,7 +22,48 @@ public class Cli {
 
 	public static void main(final String[] args) {
 		
-		String name = "javalesaaaang";
+		String name = "mashallaaaaaah";
+		LocalDate introduced = LocalDate.parse("1993-02-21");
+		LocalDate discontinued = LocalDate.parse("2000-10-12");
+		int company = 3;
+		int cprid = 578;
+		
+		Computer computertest = new ComputerBuilder().setName(name).setIntroduced(introduced).setDiscontinued(discontinued).setCompany(new Company(company, "newcompany")).build();
+		
+		context = new AnnotationConfigApplicationContext(ConfigWeb.class);
+		context.getBean(ComputerService.class).editCPR(cprid, computertest);
+		List<Computer> listcomputer = context.getBean(ComputerService.class).getAllComputer();
+		for (Computer computer : listcomputer) {
+			System.out.println(computer);
+		}
+		
+		
+		
+
+		/*
+		 * 
+		 * TEST DELETE COMPANY 
+		 * 
+		 * context = new AnnotationConfigApplicationContext(ConfigWeb.class);
+		int id = 42;
+		context.getBean(CompanyService.class).deleteCompany(id);
+		List<Company> listcompany = context.getBean(CompanyService.class).getAllCompany();
+		for (Company company : listcompany) {
+			System.out.println(company);
+		}
+		
+		
+		 * TEST DELETE COMPUTER WITH COMPANY ID
+		 * context = new AnnotationConfigApplicationContext(ConfigWeb.class);
+		int id = 42;
+		context.getBean(ComputerService.class).deleteComputerWithCnyId(id);
+		List<Computer> listcomputer = context.getBean(ComputerService.class).getAllComputer();
+		for (Computer computer : listcomputer) {
+			System.out.println(computer);
+		 * 
+		 * 
+		 * TEST ADD COMPUTER
+		 * 	String name = "javalesaaaang";
 		LocalDate introduced = LocalDate.parse("1993-02-23");
 		LocalDate discontinued = LocalDate.parse("2000-10-08");
 		int company = 3;
@@ -35,21 +76,6 @@ public class Cli {
 		for (Computer computer : listcomputer) {
 			System.out.println(computer);
 		}
-		
-		
-		
-
-		/*
-		 * 
-		 * computer.getCompany().getId());
-		 * TEST DELETE COMPUTER WITH COMPANY ID
-		 * context = new AnnotationConfigApplicationContext(ConfigWeb.class);
-		int id = 42;
-		context.getBean(ComputerService.class).deleteComputerWithCnyId(id);
-		List<Computer> listcomputer = context.getBean(ComputerService.class).getAllComputer();
-		for (Computer computer : listcomputer) {
-			System.out.println(computer);
-		 * 
 		 * 
 		 * TEST DELETE COMPUTER
 		 * 	context = new AnnotationConfigApplicationContext(ConfigWeb.class);
@@ -60,21 +86,7 @@ public class Cli {
 			System.out.println(computer);
 		}
 		
-		 * 
-		 * 
-		 * 
-		String name = "javalesaaaang";
-		LocalDate introduced = LocalDate.parse("1993-02-23");
-		LocalDate discontinued = LocalDate.parse("2000-10-08");
-		
-		Computer computertest = new ComputerBuilder().setName(name).setIntroduced(introduced).setDiscontinued(discontinued).build();
-		
-		context = new AnnotationConfigApplicationContext(ConfigWeb.class);
-		context.getBean(ComputerService.class).addComputer(computertest);
-		List<Computer> listcomputer = context.getBean(ComputerService.class).getAllComputer();
-		for (Computer computer : listcomputer) {
-			System.out.println(computer);
-		}*/
+	*/
 		
 		
 		

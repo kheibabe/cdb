@@ -55,4 +55,8 @@ public class ComputerService {
 	public void deleteComputerWithCnyId(int id) {
 		computerDAO.deleteComputerWithCnyId(id);
 	}
+	
+	public void editCPR(int id, Computer computer) {
+		computerDAO.editCPR(id, computer);
+	}
 }

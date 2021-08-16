@@ -12,9 +12,7 @@ import cdb.service.ComputerService;
 public class ComputerController {
 	
 	private ComputerService computerService ;
-	/* 
-	 * = new ComputerService(ComputerDAO);
-	 */
+	
 	@Autowired
 	public ComputerController(ComputerService computerService) {
 		this.computerService = computerService;
@@ -35,6 +33,10 @@ public class ComputerController {
 
 	public void deleteComputerWithCnyId(int id) {
 		computerService.deleteComputerWithCnyId(id);
+	}
+	
+	public void editCPR(int id, Computer computer) {
+		computerService.editCPR(id, computer);
 	}
 
 }

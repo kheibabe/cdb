@@ -36,11 +36,9 @@ public class ComputerDAO {
 	private static final String REQ_COUNT_ALL_CPR = "SELECT COUNT(*) FROM computer;";
 	private static final String REQ_DELETE_CPR = "DELETE FROM computer WHERE id = :id ;";
 	private static final String REQ_DELETE_CPR_CNYID = "DELETE FROM computer WHERE company_id = :id ;";
+	private static final String REQ_EDIT_CPR = "UPDATE computer SET name = :name,  introduced = :introduced, discontinued = :discontinued, company_id = :companyId WHERE id = :id ;";
 
-	/*
-	 * public static ComputerDAO getInstance() { if(instance == null) { instance =
-	 * new ComputerDAO(); } return instance; }
-	 */
+
 	@Autowired
 	public ComputerDAO(ComputerMapper computerMapper, JdbcTemplate jdbcTemplate,
 			NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -87,6 +85,13 @@ public class ComputerDAO {
 		SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", id);
 		namedParameterJdbcTemplate.update(REQ_DELETE_CPR_CNYID, namedParameters);
 
+	}
+	
+	public void editCPR(int id, Computer computer) {
+		
+		SqlParameterSource namedParameters = new MapSqlParameterSource();
+		((MapSqlParameterSource) namedParameters).addValue("name", computer.getName()).addValue("introduced", computer.getIntroduced()).addValue("discontinued", computer.getDiscontinued()).addValue("companyId", computer.getCompany().getId()).addValue("id", id);
+		namedParameterJdbcTemplate.update(REQ_EDIT_CPR, namedParameters);
 	}
 
 }
