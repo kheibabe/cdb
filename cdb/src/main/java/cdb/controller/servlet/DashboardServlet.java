@@ -13,43 +13,72 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.ModelAndView;
 
 import cdb.config.ConfigWeb;
 import cdb.model.Computer;
 import cdb.model.Page;
+import cdb.persistance.DTO.ComputerDTODb;
+import cdb.persistance.mapper.ComputerMapper;
 import cdb.service.ComputerService;
 
+@Controller
+public class DashboardServlet extends HttpServlet {
+	
+	
+	private ComputerService computerService; 
+	private ComputerMapper computerMapper;
+	
+	
+	public DashboardServlet(ComputerService computerService, ComputerMapper computerMapper) {
+		super();
+		this.computerService = computerService;
+		this.computerMapper = computerMapper;
+	}
+	
+	@GetMapping(value = "/dashboard")
+	protected ModelAndView getModelAndView(String viewName, Exception ex) {
+		  ModelAndView mv = new ModelAndView(viewName);
+		
+			mv.addObject("listComputer", this.getAllComputer());
+		  
+		  return mv;
+		}
+	
+	private List<ComputerDTODb> getAllComputer() {
+		
+		return computerService.getAllComputer();
+	}
+	
+}
+
+
+
+
+/*
+ * 
+ * 
+ * List<Computer> listComputer = computerService.getAllComputer();
+request.setAttribute("listComputer", listComputer);
+
+int nbComputer = computerService.countAllComputer();
+request.setAttribute("nbComputer", nbComputer);
+
+
+request.setAttribute("page", page);
+ * 
+ 
 // @WebServlet("/dashboard")
 @WebServlet(name = "Dashboard", urlPatterns = { "/dashboard" })
 
-public class DashboardServlet extends HttpServlet {
 
-	private ComputerService computerService; 
+
+	
 	private Page page = new Page();
-	// private WebApplicationContext springContext;
-			
 	
-	/*
-	public DashboardServlet() {
-		this.computerService = ComputerService.getInstance();
-		
-	}
-	
-	@Autowired
-	public DashboardServlet(ComputerService computerService) {
-		this.computerService = computerService;
-	}
-	*/
-	
-	
-	
-	
-	/* 
-	 * ApplicationContext context = new AnnotationConfigApplicationContext(AccountConfig.class);
-AccountService accountService = context.getBean(AccountService.class);
-	 * 
-	 */
 	public void init() {
 		try {
 			super.init();
@@ -79,8 +108,4 @@ AccountService accountService = context.getBean(AccountService.class);
 		
 	}
 
-	
-	
-	
-	
-}
+	*/

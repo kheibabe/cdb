@@ -16,21 +16,25 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 
 import cdb.config.ConfigWeb;
+import cdb.model.Company;
 import cdb.model.Computer;
 import cdb.persistance.DTO.ComputerDTO;
 import cdb.persistance.DTO.ComputerDTO.ComputerDTOBuilder;
+import cdb.persistance.DTO.DTOCompanyDB;
+import cdb.service.CompanyService;
 import cdb.service.ComputerService;
 
 /**
  * Servlet implementation class AddComputerServlet
  */
-@WebServlet("/addComputer")
+@WebServlet("/AddComputerServlet")
 public class AddComputerServlet extends HttpServlet {
 	
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;;
 	private ComputerService computerService;
 	private ComputerDTO computerDTO;
+	private CompanyService companyService;
 	// private WebApplicationContext springContext;
        
     /**
@@ -55,6 +59,8 @@ public class AddComputerServlet extends HttpServlet {
 			super.init();
 			ApplicationContext context = new AnnotationConfigApplicationContext(ConfigWeb.class);
 			computerService = context.getBean(ComputerService.class);
+			companyService = context.getBean(CompanyService.class);
+			computerDTO = context.getBean(ComputerDTO.class);
 			
 		} catch(ServletException e) {
 			e.printStackTrace();
@@ -64,8 +70,8 @@ public class AddComputerServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<Computer> listComputer = computerService.getAllComputer();
-		request.setAttribute("listComputer", listComputer);
+		List<DTOCompanyDB> listCompany = companyService.getAllCompany();
+		request.setAttribute("listCompany", listCompany);
 	
 		this.getServletContext().getRequestDispatcher("/WEB-INF/addComputer.jsp").forward(request, response);
 	}
@@ -75,11 +81,8 @@ public class AddComputerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	     	/* String name=request.getParameter("name");  
-	        String password=request.getParameter("password");  
-	        String email=request.getParameter("email");  
-	        String country=request.getParameter("country"); */
-			
+		ComputerDTO computerDTO = new ComputerDTO();
+		ComputerDTOBuilder addComputer = new ComputerDTOBuilder();
 		
 		String computerName = request.getParameter("name");
 		String computerIntroduced = request.getParameter("introduced");
@@ -87,19 +90,21 @@ public class AddComputerServlet extends HttpServlet {
 		String computerCompanyID = request.getParameter("companyID");
 		
 		Computer computer = new Computer();
-		/*
-		computer.setName(computerName);
-		computer.setIntroduced(computerIntroduced);
-		computer.setDiscontinued(computerDiscontinued);
 		
-		*/
+		addComputer.setName(computerName);
+		addComputer.setIntroduced(computerIntroduced);
+		addComputer.setDiscontinued(computerDiscontinued);
+		addComputer.setCompanyID(computerCompanyID);
+		
+		computerDTO = addComputer.build();
+		
+		//computerService.addComputer(computer);
+		
+		
+		response.sendRedirect("http://localhost:8080/cdb/AddComputerServlet");
 		
 		
 		
-		
-		
-		
-		doGet(request, response);
 	}
 
 }

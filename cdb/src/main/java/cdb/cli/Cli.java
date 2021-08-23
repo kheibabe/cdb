@@ -2,15 +2,19 @@ package cdb.cli;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import cdb.config.ConfigJPA;
 import cdb.config.ConfigWeb;
 import cdb.model.Company;
 import cdb.model.Computer;
 import cdb.model.Computer.ComputerBuilder;
 import cdb.persistance.ComputerDAO;
+import cdb.persistance.DTO.ComputerDTODb;
+import cdb.persistance.DTO.DTOCompanyDB;
 import cdb.service.CompanyService;
 import cdb.service.ComputerService;
 
@@ -22,7 +26,36 @@ public class Cli {
 
 	public static void main(final String[] args) {
 		
-		String name = "mashallaaaaaah";
+		
+		String name = "javaleSangouaisouaisouais";
+		LocalDate introduced = LocalDate.parse("1993-02-23");
+		LocalDate discontinued = LocalDate.parse("2000-10-08");
+		int id = 578;
+		int company = 13;
+		
+		ComputerDTODb computertest = new ComputerDTODb().setName(name).setIntroduced(introduced).setDiscontinued(discontinued).setCompany(new DTOCompanyDB(company, "newcompany"));
+		
+		context = new AnnotationConfigApplicationContext(ConfigWeb.class);
+		context.getBean(ComputerService.class).editCPR(id, computertest);
+		List<ComputerDTODb> listcomputer = context.getBean(ComputerService.class).getAllComputer();
+		for (ComputerDTODb computer : listcomputer) {
+			System.out.println(computer);
+		}
+		
+		System.out.println(listcomputer.size());
+		//System.out.println(Dtocompanydb);
+		/* List<DTOCompanyDB> listcompany = context.getBean(CompanyService.class).getAllCompany();
+		for (DTOCompanyDB company : listcompany) {
+			System.out.println(company);
+		}
+		
+		*/
+		
+
+		/*
+		 * TEST EDIT COMPUTER
+		 * 
+		 * String name = "mashallaaaaaa";
 		LocalDate introduced = LocalDate.parse("1993-02-21");
 		LocalDate discontinued = LocalDate.parse("2000-10-12");
 		int company = 3;
@@ -37,10 +70,6 @@ public class Cli {
 			System.out.println(computer);
 		}
 		
-		
-		
-
-		/*
 		 * 
 		 * TEST DELETE COMPANY 
 		 * 
@@ -85,6 +114,16 @@ public class Cli {
 		for (Computer computer : listcomputer) {
 			System.out.println(computer);
 		}
+		*
+		*
+		*TEST GET COMPANYID
+		*context = new AnnotationConfigApplicationContext(ConfigWeb.class);
+		int id = 42;
+		Optional<DTOCompanyDB> Dtocompanydb = context.getBean(CompanyService.class).getCompany(id);
+		System.out.println(Dtocompanydb);
+		
+		
+		
 		
 	*/
 		

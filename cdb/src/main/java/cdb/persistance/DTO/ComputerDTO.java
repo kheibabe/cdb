@@ -2,65 +2,30 @@ package cdb.persistance.DTO;
 
 import java.time.LocalDate;
 
-import cdb.model.Company;
+import org.springframework.stereotype.Component;
 
+@Component("ComputerDTO")
 public class ComputerDTO {
 
-	/*  private Branch(BranchBuilder builder) {
-    // Fields controls
- 
-    name = builder.name;
-    description = Optional.ofNullable(builder.description);
-    owner = new Username(builder.owner);
- }
- 
-  public static BranchBuilder builder() {
-    return new BranchBuilder();
-  }
- 
-  // Business methods
- 
-  public static class BranchBuilder {
-    private String name;
-    private String description;
-    private String owner;
- 
-    public BranchBuilder name(String name) {
-      this.name = name;
- 
-      return this;
-    }
-    public BranchBuilder description(String description) {
-      this.description = description;
-      return this;
-    }
-    public BranchBuilder owner(String owner) {
-      this.owner = owner;
-      return this;
-    }
-    public Branch build() {
-      return new Branch(this);
-    }
-  }
-}
-*/
+
+	private int id;
+
+	private String name;
+
+	private String introduced;
 	
-	// private Branch(BranchBuilder builder)
-	
+	private String discontinued;
 
-	private String name ;
-
-	private String introduced ;
-
-	private String discontinued ;
-
-	private String companyID ;
+	private String companyID;
 
 	private ComputerDTO(ComputerDTOBuilder computerDTOBuilder) {
 		this.name = computerDTOBuilder.name;
 		this.introduced = computerDTOBuilder.introduced;
 		this.discontinued = computerDTOBuilder.discontinued;
 		this.companyID = computerDTOBuilder.companyID;
+	}
+
+	public ComputerDTO() {
 	}
 
 	public String getName() {
@@ -71,6 +36,12 @@ public class ComputerDTO {
 		return introduced;
 	}
 
+	@Override
+	public String toString() {
+		return "ComputerDTO [name=" + name + ", introduced=" + introduced + ", discontinued=" + discontinued
+				+ ", companyID=" + companyID + "]";
+	}
+
 	public String getDiscontinued() {
 		return discontinued;
 	}
@@ -79,47 +50,40 @@ public class ComputerDTO {
 		return companyID;
 	}
 
-public static class ComputerDTOBuilder {
+	public static class ComputerDTOBuilder {
 
-		
-		
-		private String name ;
+		private String name;
 
-		private String introduced ;
-		
-		private String discontinued ;
+		private String introduced;
 
-		private String companyID ;
+		private String discontinued;
 
+		private String companyID;
 
-		public ComputerDTOBuilder(String name) {
+		public ComputerDTOBuilder setName(String name) {
 			this.name = name;
-			this.introduced = "";
-			this.discontinued = "";
-			this.companyID ="";
+			return this;
 		}
-	
 
-		public ComputerDTOBuilder introduced(String introduced) {
+		public ComputerDTOBuilder setIntroduced(String introduced) {
 			this.introduced = introduced;
 			return this;
 		}
 
-		public ComputerDTOBuilder discontinued(String discontinued) {
+		public ComputerDTOBuilder setDiscontinued(String discontinued) {
 			this.discontinued = discontinued;
 			return this;
 		}
 
-		public ComputerDTOBuilder companyID(String companyID) {
+		public ComputerDTOBuilder setCompanyID(String companyID) {
 			this.companyID = companyID;
 			return this;
 		}
-		
+
 		public ComputerDTO build() {
 			return new ComputerDTO(this);
 		}
 
 	}
-	
-	
+
 }

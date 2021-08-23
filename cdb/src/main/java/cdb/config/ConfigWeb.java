@@ -2,9 +2,11 @@ package cdb.config;
 
 import javax.sql.DataSource;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,31 +25,15 @@ import com.zaxxer.hikari.HikariDataSource;
 
 // @EnableWebMvc
 @Configuration
-
+@Import(ConfigJPA.class)
 @ComponentScan(basePackages = { "cdb.persistance", "cdb.service", "cdb.controller", "cdb.servlet",
 		"cdb.persistance.CdbConnection" })
 
 @PropertySource("classpath:database.properties")
 
-public class ConfigWeb  {
+public class ConfigWeb {
 
-/*extends DelegatingWebMvcConfiguration
-	@Bean
-	public ViewResolver viewResolver() {
-		InternalResourceViewResolver bean = new InternalResourceViewResolver();
 
-		bean.setViewClass(JstlView.class);
-		bean.setPrefix("/WEB-INF/");
-		bean.setSuffix(".jsp");
-
-		return bean;
-	}
-	
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/**").addResourceLocations("/static/");
-	}
-*/
 	@Bean
 	public HikariDataSource mysqlDataSource() {
 

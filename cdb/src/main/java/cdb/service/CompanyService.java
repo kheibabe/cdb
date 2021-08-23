@@ -1,6 +1,7 @@
 package cdb.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -8,11 +9,15 @@ import cdb.model.Company;
 import cdb.model.Computer;
 import cdb.persistance.CdbConnection;
 import cdb.persistance.CompanyDAO;
+import cdb.persistance.CompanyRepository;
+import cdb.persistance.DTO.ComputerDTODb;
+import cdb.persistance.DTO.DTOCompanyDB;
 
 @Service
 public class CompanyService {
 	
-	private CompanyDAO companyDAO; // = new CompanyDAO();
+	private CompanyDAO companyDAO;
+	private CompanyRepository companyRepository;// = new CompanyDAO();
 	/* private static CompanyService instance;
 
 	public static CompanyService getInstance() {
@@ -23,21 +28,22 @@ public class CompanyService {
 	}
 	*/
 	
-	public CompanyService(CompanyDAO companyDAO) {
-		this.companyDAO = companyDAO;
+	public CompanyService(CompanyRepository companyRepository) {
+		this.companyRepository = companyRepository;
+		
 	}
 	
-	public List<Company> getAllCompany() {
-		return companyDAO.getAllCompany();
+	public List<DTOCompanyDB> getAllCompany() {
+		return companyRepository.findAll();
 	}
 	
-	public Company getCompany(int id) {
-		return companyDAO.getCompanyById(id);
+	public Optional <DTOCompanyDB> getCompany(int id) {
+		return companyRepository.findById(id);
 	}
+	
 
 	public void deleteCompany(int id) {
-		// TODO Auto-generated method stub
-		companyDAO.deleteCompany(id);
+		companyRepository.deleteById(id);
 	}
 	
 }

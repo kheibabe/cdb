@@ -24,7 +24,7 @@
     <section id="main">
         <div class="container">
             <h1 id="homeTitle">
-                <c:out value = "${ nbComputer }"/> Computers found
+                <c:out value="${page.nbrElemDb }"/> Computers found
             </h1>
             <div id="actions" class="form-horizontal">
                 <div class="pull-left">
@@ -36,7 +36,7 @@
                     </form>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-success" id="addComputer" href="addComputer">Add Computer</a> 
+                    <a class="btn btn-success" id="addComputer" href="/cdb/AddComputerServlet">Add Computer</a> 
                     <a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();">Edit</a>
                 </div>
             </div>
@@ -115,7 +115,7 @@
               <li><a href="#">4</a></li>
               <li><a href="#">5</a></li>
               <li>
-                <a href="?page=${ page.nbrePageMax }" aria-label="Next">
+                <a href="?page=${ page.getNbrePageMax() }" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
