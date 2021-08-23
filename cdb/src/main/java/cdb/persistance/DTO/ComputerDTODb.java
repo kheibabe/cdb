@@ -2,8 +2,10 @@ package cdb.persistance.DTO;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,7 +21,7 @@ public class ComputerDTODb {
 	private String name;
 	private LocalDate introduced;
 	private LocalDate discontinued;
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "company_id")
 	private DTOCompanyDB dtoCompanyDB;
 	
