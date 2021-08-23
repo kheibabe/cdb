@@ -36,7 +36,7 @@ public class Cli {
 		ComputerDTODb computertest = new ComputerDTODb().setName(name).setIntroduced(introduced).setDiscontinued(discontinued).setCompany(new DTOCompanyDB(company, "newcompany"));
 		
 		context = new AnnotationConfigApplicationContext(ConfigWeb.class);
-		context.getBean(ComputerService.class).editCPR(id, computertest);
+		context.getBean(ComputerService.class).addComputer(computertest);
 		List<ComputerDTODb> listcomputer = context.getBean(ComputerService.class).getAllComputer();
 		for (ComputerDTODb computer : listcomputer) {
 			System.out.println(computer);
