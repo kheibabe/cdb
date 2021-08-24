@@ -27,15 +27,21 @@ public class Cli {
 	public static void main(final String[] args) {
 		
 		
-		String name = "javaleSangouaisouaisouais";
-		LocalDate introduced = LocalDate.parse("1993-02-23");
-		LocalDate discontinued = LocalDate.parse("2000-10-08");
-		int id = 578;
-		int company = 13;
+		String name = "IM NEW";
+	
 		
-		ComputerDTODb computertest = new ComputerDTODb().setName(name).setIntroduced(introduced).setDiscontinued(discontinued).setCompany(new DTOCompanyDB(company, "newcompany"));
+		int company = 13;
+		LocalDate introduced = LocalDate.parse("1993-02-23");
+		LocalDate discontinued = null;
+		
+		ComputerDTODb computertest = new ComputerDTODb(name, introduced, discontinued, new DTOCompanyDB(company, "newcompany"));
+				/* computertest.setName(name);
+				computertest.setIntroduced(introduced);
+				computertest.setDiscontinued(discontinued);
+				computertest.setDTOCompanyDB(new DTOCompanyDB(company, "newcompany"));*/
 		
 		context = new AnnotationConfigApplicationContext(ConfigWeb.class);
+		// context.getBean(ComputerService.class).getComputer(id).get();
 		context.getBean(ComputerService.class).addComputer(computertest);
 		List<ComputerDTODb> listcomputer = context.getBean(ComputerService.class).getAllComputer();
 		for (ComputerDTODb computer : listcomputer) {
@@ -54,6 +60,28 @@ public class Cli {
 
 		/*
 		 * TEST EDIT COMPUTER
+		 * 
+		 * EN MODE JPA : 
+		 * 
+		 * String name = "IM NEW";
+		int id = 2;
+		int company = 13;
+		LocalDate introduced = LocalDate.parse("1993-02-23");
+		LocalDate discontinued = null;
+		
+		ComputerDTODb computertest = new ComputerDTODb(id, name, introduced, discontinued, new DTOCompanyDB(company, "newcompany"));
+		
+		context = new AnnotationConfigApplicationContext(ConfigWeb.class);
+		// context.getBean(ComputerService.class).getComputer(id).get();
+		context.getBean(ComputerService.class).editCPR(computertest);
+		List<ComputerDTODb> listcomputer = context.getBean(ComputerService.class).getAllComputer();
+		for (ComputerDTODb computer : listcomputer) {
+			System.out.println(computer);
+		}
+		
+		System.out.println(listcomputer.size());
+		 * 
+		 * 
 		 * 
 		 * String name = "mashallaaaaaa";
 		LocalDate introduced = LocalDate.parse("1993-02-21");
@@ -92,6 +120,28 @@ public class Cli {
 		 * 
 		 * 
 		 * TEST ADD COMPUTER
+		 * 
+		 * EN MODE JPA :
+		 * 
+		 * 	String name = "IM NEW";
+	
+		int company = 13;
+		LocalDate introduced = LocalDate.parse("1993-02-23");
+		LocalDate discontinued = null;
+		
+		ComputerDTODb computertest = new ComputerDTODb(name, introduced, discontinued, new DTOCompanyDB(company, "newcompany"));
+				
+		
+		context = new AnnotationConfigApplicationContext(ConfigWeb.class);
+		// context.getBean(ComputerService.class).getComputer(id).get();
+		context.getBean(ComputerService.class).addComputer(computertest);
+		List<ComputerDTODb> listcomputer = context.getBean(ComputerService.class).getAllComputer();
+		for (ComputerDTODb computer : listcomputer) {
+			System.out.println(computer);
+		}
+		
+		System.out.println(listcomputer.size());
+		 * 
 		 * 	String name = "javalesaaaang";
 		LocalDate introduced = LocalDate.parse("1993-02-23");
 		LocalDate discontinued = LocalDate.parse("2000-10-08");

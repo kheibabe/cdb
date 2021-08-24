@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import cdb.model.Company;
@@ -13,7 +14,7 @@ import cdb.persistance.DTO.ComputerDTO;
 import cdb.persistance.DTO.ComputerDTODb;
 
 @Repository
-public interface ComputerRepository extends JpaRepository<ComputerDTODb, Integer>{
+public interface ComputerRepository extends CrudRepository<ComputerDTODb, Integer>{
 
 	public Optional<ComputerDTODb> findById(int id);
 	
@@ -23,7 +24,6 @@ public interface ComputerRepository extends JpaRepository<ComputerDTODb, Integer
 	
 	public long count();
 	
-	public ComputerDTODb update(ComputerDTODb computerDTODb);
-	
+	public ComputerDTODb save(ComputerDTODb computerDTODb);
 	
 }

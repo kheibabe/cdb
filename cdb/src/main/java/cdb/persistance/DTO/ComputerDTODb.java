@@ -38,6 +38,13 @@ public class ComputerDTODb {
 		this.discontinued = discontinued;
 		this.dtoCompanyDB = dtoCompanyDB;
 	}
+	public ComputerDTODb(String name, LocalDate introduced, LocalDate discontinued,
+			DTOCompanyDB dtoCompanyDB) {
+		this.name = name;
+		this.introduced = introduced;
+		this.discontinued = discontinued;
+		this.dtoCompanyDB = dtoCompanyDB;
+	}
 	public String getName() {
 		return name;
 	}
@@ -55,12 +62,24 @@ public class ComputerDTODb {
 	}
 	public void setDiscontinued(LocalDate discontinued) {
 		this.discontinued = discontinued;
+				
 	}
+	public DTOCompanyDB getDtoCompanyDB() {
+		return dtoCompanyDB;
+	}
+
+
+	public void setDtoCompanyDB(DTOCompanyDB dtoCompanyDB) {
+		this.dtoCompanyDB = dtoCompanyDB;
+	}
+
+
 	public DTOCompanyDB getDTOCompanyDB() {
 		return dtoCompanyDB;
 	}
-	public void setDtoCompanyDbService(DTOCompanyDB dtoCompanyDB) {
+	public void setDTOCompanyDB(DTOCompanyDB dtoCompanyDB) {
 		this.dtoCompanyDB = dtoCompanyDB;
+		
 	}
 	public int getId() {
 		return id;

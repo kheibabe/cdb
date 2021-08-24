@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import cdb.model.Computer;
 import cdb.persistance.ComputerDAO;
 import cdb.persistance.ComputerRepository;
+import cdb.persistance.DTO.ComputerDTO;
 import cdb.persistance.DTO.ComputerDTODb;
-
 @Service
 @Transactional
 public class ComputerService {
@@ -61,13 +61,10 @@ public class ComputerService {
 	public void deleteComputerWithCnyId(int id) {
 		computerRepository.deleteById(id);
 	}
-	/*
+	
 	public void editCPR(ComputerDTODb dto) {
-		// computerRepository.findById(id).get();
-		// computerRepository.update(computerDTODb);
+		computerRepository.save(dto);
+		// Il suffit d'ajouter id de CPR dans le cli pour que ça édite au lieu de créer.
+		}
 		
-		Computer myComputer = computerRepository.findById(dto.id);
-	    mapper.updateComputerFromDto(dto, myComputer);
-	    computerRepository.save(myComputer);
-	}*/
 }
