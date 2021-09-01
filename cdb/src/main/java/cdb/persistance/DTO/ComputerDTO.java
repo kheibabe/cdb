@@ -2,20 +2,26 @@ package cdb.persistance.DTO;
 
 import java.time.LocalDate;
 
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.springframework.stereotype.Component;
 
+@XmlRootElement(name="computer")
 @Component("ComputerDTO")
 public class ComputerDTO {
 
-
+	@XmlElement(name="id")
 	private int id;
 
+	@XmlElement(name="name")
 	private String name;
-
+	@XmlElement(name="introduced")
 	private String introduced;
-	
+	@XmlElement(name="discontinued")
 	private String discontinued;
-
+	@XmlElement(name="companyID")
 	private String companyID;
 
 	private ComputerDTO(ComputerDTOBuilder computerDTOBuilder) {

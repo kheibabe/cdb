@@ -2,6 +2,9 @@ package cdb.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+
 
 
 public class Computer {
@@ -45,6 +48,7 @@ public class Computer {
 		this.name = name;
 	}
 
+	@JsonSerialize(using=DateSerializer.class)
 	public LocalDate getIntroduced() {
 		return introduced;
 	}
@@ -52,7 +56,8 @@ public class Computer {
 	public void setIntroduced(LocalDate introduced) {
 		this.introduced = introduced;
 	}
-
+	
+	@JsonSerialize(using=DateSerializer.class)
 	public LocalDate getDiscontinued() {
 		return discontinued;
 	}
